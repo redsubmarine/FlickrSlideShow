@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let slideShowViewController = window?.rootViewController as? SlideShowViewController
+
+        slideShowViewController?.viewModel = SlideShowViewModel()
+
         return true
     }
 
