@@ -8,7 +8,7 @@ target 'FlickrSlideShow' do
   # Pods for FlickrSlideShow
   pod 'RxSwift', '4.3.1'
   pod 'RxCocoa', '4.3.1'
-  pod 'RxAlamofire', '4.3.0'
+  pod 'SwiftLint', '0.27.0'
 
   target 'FlickrSlideShowTests' do
     inherit! :search_paths
