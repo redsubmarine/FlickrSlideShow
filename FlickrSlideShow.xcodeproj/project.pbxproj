@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		1DD8C74479E2FB4E4729B265 /* Pods_FlickrSlideShowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EACE49A1C2194629616C8E32 /* Pods_FlickrSlideShowTests.framework */; };
 		9D1A43172170BBF800F6E5E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1A43162170BBF800F6E5E0 /* AppDelegate.swift */; };
-		9D1A43192170BBF800F6E5E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1A43182170BBF800F6E5E0 /* ViewController.swift */; };
 		9D1A431C2170BBF800F6E5E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D1A431A2170BBF800F6E5E0 /* Main.storyboard */; };
 		9D1A431E2170BBF900F6E5E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D1A431D2170BBF900F6E5E0 /* Assets.xcassets */; };
 		9D1A43212170BBF900F6E5E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D1A431F2170BBF900F6E5E0 /* LaunchScreen.storyboard */; };
 		9D1A432C2170BBF900F6E5E0 /* FlickrSlideShowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1A432B2170BBF900F6E5E0 /* FlickrSlideShowTests.swift */; };
+		9D1A43382170DD1900F6E5E0 /* SlideShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1A43372170DD1900F6E5E0 /* SlideShowViewController.swift */; };
+		9D1A433A2170E3D900F6E5E0 /* SlideShowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1A43392170E3D900F6E5E0 /* SlideShowViewModel.swift */; };
+		9D1A433C2170E50B00F6E5E0 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1A433B2170E50B00F6E5E0 /* SettingViewController.swift */; };
 		F5989291DF277729BA1F48CB /* Pods_FlickrSlideShow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F60F265AC8E9AF2944E4866B /* Pods_FlickrSlideShow.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +34,6 @@
 		40B489D184525DF53C5CA41B /* Pods-FlickrSlideShowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSlideShowTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrSlideShowTests/Pods-FlickrSlideShowTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9D1A43132170BBF800F6E5E0 /* FlickrSlideShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrSlideShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D1A43162170BBF800F6E5E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9D1A43182170BBF800F6E5E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9D1A431B2170BBF800F6E5E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9D1A431D2170BBF900F6E5E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D1A43202170BBF900F6E5E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -40,6 +41,9 @@
 		9D1A43272170BBF900F6E5E0 /* FlickrSlideShowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrSlideShowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D1A432B2170BBF900F6E5E0 /* FlickrSlideShowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSlideShowTests.swift; sourceTree = "<group>"; };
 		9D1A432D2170BBF900F6E5E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D1A43372170DD1900F6E5E0 /* SlideShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideShowViewController.swift; sourceTree = "<group>"; };
+		9D1A43392170E3D900F6E5E0 /* SlideShowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideShowViewModel.swift; sourceTree = "<group>"; };
+		9D1A433B2170E50B00F6E5E0 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9FFC96AC21957EB0CFC22CE1 /* Pods-FlickrSlideShowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSlideShowTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrSlideShowTests/Pods-FlickrSlideShowTests.release.xcconfig"; sourceTree = "<group>"; };
 		B80A60FB89529A8B36094E8D /* Pods-FlickrSlideShow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSlideShow.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrSlideShow/Pods-FlickrSlideShow.debug.xcconfig"; sourceTree = "<group>"; };
 		EACE49A1C2194629616C8E32 /* Pods_FlickrSlideShowTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickrSlideShowTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,7 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				9D1A43162170BBF800F6E5E0 /* AppDelegate.swift */,
-				9D1A43182170BBF800F6E5E0 /* ViewController.swift */,
+				9D1A43392170E3D900F6E5E0 /* SlideShowViewModel.swift */,
+				9D1A43372170DD1900F6E5E0 /* SlideShowViewController.swift */,
+				9D1A433B2170E50B00F6E5E0 /* SettingViewController.swift */,
 				9D1A431A2170BBF800F6E5E0 /* Main.storyboard */,
 				9D1A431D2170BBF900F6E5E0 /* Assets.xcassets */,
 				9D1A431F2170BBF900F6E5E0 /* LaunchScreen.storyboard */,
@@ -321,8 +327,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D1A43192170BBF800F6E5E0 /* ViewController.swift in Sources */,
+				9D1A433A2170E3D900F6E5E0 /* SlideShowViewModel.swift in Sources */,
 				9D1A43172170BBF800F6E5E0 /* AppDelegate.swift in Sources */,
+				9D1A43382170DD1900F6E5E0 /* SlideShowViewController.swift in Sources */,
+				9D1A433C2170E50B00F6E5E0 /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
