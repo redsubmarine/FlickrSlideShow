@@ -17,9 +17,12 @@ class SlideShowViewController: UIViewController {
 
     var viewModel: SlideShowViewModel!
     var disposeBag = DisposeBag()
+    @IBOutlet weak var playButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        viewModel.getMorePhotos()
 
         viewModel.currentImage
             .bind(onNext: display)
@@ -32,17 +35,21 @@ class SlideShowViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel.getMorePhotos()
+        playButton.rx.tap
+            .bind(onNext: viewModel.pauseToggle)
+            .disposed(by: disposeBag)
     }
 
     override var prefersStatusBarHidden: Bool {
         return true
     }
 
-    func display(next image: FlickrImageProtocol?) {
+    private func display(next image: FlickrImageProtocol?) {
+
         guard let url = image?.url else {
             return
         }
+
         let tempImageView = UIImageView()
         tempImageView.af_setImage(withURL: url)
 

@@ -17,7 +17,7 @@ class PublicPhotosRequest: FlickrRequest {
 
     var url: String = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1"
 
-    var response: BehaviorRelay<PhotosResponse?> = BehaviorRelay(value: nil)
+    let response: BehaviorRelay<PhotosResponse?> = BehaviorRelay(value: nil)
 
     func params() -> JSON? {
         return nil
