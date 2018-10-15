@@ -7,26 +7,63 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 struct SlideShowViewModel {
-    var photos: [UIImage]
-    var currentIndex: Int = 0
+    private var _photos = BehaviorRelay<[FlickrImageProtocol]>(value: [])
+    var photos: Observable<[FlickrImageProtocol]>
 
-    init() {
-        photos = [
-            UIImage(named: "30331203967_7720cb9c89_m")!,
-            UIImage(named: "30331205227_c07c0e139a_m")!,
-            UIImage(named: "30331205497_c93c763c59_m")!,
-            UIImage(named: "30331205857_2df4c2c643_m")!,
-            UIImage(named: "30331208127_263fcdae5a_m")!
-        ]
+    var currentImage: Observable<FlickrImageProtocol?>
+    private var interval: BehaviorRelay<TimeInterval> = BehaviorRelay(value: 1)
+    private var server: Server
+
+    private var _needFetchData = BehaviorRelay(value: false)
+    var needFetchData: Observable<Bool>
+
+    init(server: Server) {
+        self.server = server
+        photos = _photos.asObservable()
+        needFetchData = _needFetchData.asObservable()
+            .distinctUntilChanged()
+
+        let intervalObservable = self.interval.asObservable()
+            .flatMapLatest({ Observable<Int>.interval($0, scheduler: MainScheduler.instance) })
+
+        currentImage = intervalObservable.withLatestFrom(photos)
+            .map({ photos in
+                if photos.count > 0 {
+                    return photos[0]
+                } else {
+                    return nil
+                }
+            })
+
+        _ = photos.asObservable()
+            .map({ $0.count == 3 })
+            .bind(to: _needFetchData)
+
     }
 
-    var currentImage: UIImage {
-        return photos[currentIndex]
+    func changeInterval(_ interval: Double) {
+        self.interval.accept(interval)
     }
 
-    mutating func next() {
-        currentIndex = currentIndex == photos.count - 1 ? 0 : currentIndex + 1
+    mutating func getMorePhotos() {
+        let getPublicPhotos = PublicPhotosRequest()
+        let currentPhotos = _photos.value
+        _ = server.request(getPublicPhotos)
+            .retry(3)
+            .map({ response in
+                return currentPhotos + (response?.photos ?? [])
+            })
+            .bind(to: _photos)
     }
+
+    func popFirstPhoto() {
+        var photos = _photos.value
+        photos.remove(at: 0)
+        _photos.accept(photos)
+    }
+
 }

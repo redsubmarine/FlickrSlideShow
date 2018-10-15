@@ -30,23 +30,13 @@
                                 <rect key="frame" x="298" y="626" width="30" height="30"/>
                                 <state key="normal" title="Play"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXp-xE-1Lg">
-                                <rect key="frame" x="201" y="626" width="89" height="30"/>
-                                <state key="normal" title="Next(Debug)"/>
-                                <connections>
-                                    <action selector="nextTapped:" destination="3K3-3R-ZaF" eventType="touchUpInside" id="9gV-9u-PA4"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="uNI-Ct-J4J" firstAttribute="leading" secondItem="EXp-xE-1Lg" secondAttribute="trailing" constant="8" id="JNN-6C-sDM"/>
                             <constraint firstItem="e4C-bl-Dk4" firstAttribute="trailing" secondItem="naV-yp-V1d" secondAttribute="trailing" constant="15" id="LtU-vQ-aZX"/>
-                            <constraint firstItem="EXp-xE-1Lg" firstAttribute="centerY" secondItem="uNI-Ct-J4J" secondAttribute="centerY" id="OqX-tV-TKA"/>
                             <constraint firstItem="naV-yp-V1d" firstAttribute="leading" secondItem="uNI-Ct-J4J" secondAttribute="trailing" constant="10" id="PKh-4r-1tb"/>
                             <constraint firstItem="Uu0-tw-UUm" firstAttribute="leading" secondItem="e4C-bl-Dk4" secondAttribute="leading" id="Qub-HK-2WY"/>
                             <constraint firstItem="uNI-Ct-J4J" firstAttribute="centerY" secondItem="naV-yp-V1d" secondAttribute="centerY" id="SyX-C2-G3E"/>
-                            <constraint firstItem="EXp-xE-1Lg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="e4C-bl-Dk4" secondAttribute="leading" constant="15" id="TaL-TJ-LXk"/>
                             <constraint firstItem="e4C-bl-Dk4" firstAttribute="trailing" secondItem="Uu0-tw-UUm" secondAttribute="trailing" id="ZZ4-fg-Lot"/>
                             <constraint firstItem="e4C-bl-Dk4" firstAttribute="bottom" secondItem="Uu0-tw-UUm" secondAttribute="bottom" id="bMm-63-DS7"/>
                             <constraint firstItem="Uu0-tw-UUm" firstAttribute="top" secondItem="e4C-bl-Dk4" secondAttribute="top" id="g0G-1u-UZ2"/>
