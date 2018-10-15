@@ -17,6 +17,10 @@ class SettingViewController: UITableViewController {
 
     var disposeBag = DisposeBag()
 
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,4 +37,7 @@ class SettingViewController: UITableViewController {
         timeLabel.text = "\(time) sec"
     }
 
+    @IBAction func doneTapped(_ sender: Any) {
+        navigationController?.dismiss(animated: true)
+    }
 }

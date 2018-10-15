@@ -20,7 +20,7 @@ class SlideShowViewController: UIViewController {
         photoView.image = viewModel.currentImage
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    @IBAction func nextTapped(_ sender: Any) {
 
         let currentImage = viewModel.currentImage
         viewModel.next()
@@ -30,7 +30,6 @@ class SlideShowViewController: UIViewController {
         dissolve.duration = 1.0
         dissolve.fromValue = currentImage.cgImage
         dissolve.toValue = nextImage.cgImage
-//        dissolve.isRemovedOnCompletion = false
 
         photoView.layer.add(dissolve, forKey: "animateDissolve")
         photoView.image = nextImage

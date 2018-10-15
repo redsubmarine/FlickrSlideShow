@@ -10,7 +10,7 @@ import UIKit
 
 struct SlideShowViewModel {
     var photos: [UIImage]
-    var currentIndex: Int
+    var currentIndex: Int = 0
 
     init() {
         photos = [
@@ -20,8 +20,6 @@ struct SlideShowViewModel {
             UIImage(named: "30331205857_2df4c2c643_m")!,
             UIImage(named: "30331208127_263fcdae5a_m")!
         ]
-
-        currentIndex = 0
     }
 
     var currentImage: UIImage {
