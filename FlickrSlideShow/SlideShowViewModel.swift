@@ -15,7 +15,9 @@ struct SlideShowViewModel {
     var photos: Observable<[FlickrImageProtocol]>
 
     var currentImage: Observable<FlickrImageProtocol?>
-    private var interval: BehaviorRelay<TimeInterval> = BehaviorRelay(value: 1)
+    private var _interval: BehaviorRelay<TimeInterval>
+    private var _pause = BehaviorRelay(value: true)
+    var pause: Observable<Bool>
     private var server: Server
 
     private var _needFetchData = BehaviorRelay(value: false)
@@ -26,9 +28,19 @@ struct SlideShowViewModel {
         photos = _photos.asObservable()
         needFetchData = _needFetchData.asObservable()
             .distinctUntilChanged()
+        pause = _pause.asObservable().distinctUntilChanged()
+        let interval = BehaviorRelay<Double>(value: 1)
+        _interval = interval
 
-        let intervalObservable = self.interval.asObservable()
-            .flatMapLatest({ Observable<Int>.interval($0, scheduler: MainScheduler.instance) })
+        let intervalObservable = pause
+            .flatMapLatest({ pause -> Observable<Int> in
+                if pause {
+                    return Observable.empty()
+                } else {
+                    return interval.asObservable()
+                        .flatMapLatest({ Observable<Int>.interval($0, scheduler: MainScheduler.instance) })
+                }
+            })
 
         currentImage = intervalObservable.withLatestFrom(photos)
             .map({ photos in
@@ -42,11 +54,10 @@ struct SlideShowViewModel {
         _ = photos.asObservable()
             .map({ $0.count == 3 })
             .bind(to: _needFetchData)
-
     }
 
     func changeInterval(_ interval: Double) {
-        self.interval.accept(interval)
+        self._interval.accept(interval)
     }
 
     mutating func getMorePhotos() {
@@ -58,6 +69,11 @@ struct SlideShowViewModel {
                 return currentPhotos + (response?.photos ?? [])
             })
             .bind(to: _photos)
+    }
+
+    func pauseToggle() {
+        _pause.accept(!_pause.value)
+        print(" _pause.value: \(_pause.value)")
     }
 
     func popFirstPhoto() {

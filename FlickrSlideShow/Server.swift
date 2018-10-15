@@ -38,7 +38,7 @@ class Server: FlickrServer {
                             }
                         }
                     case .failure(let error):
-                        print(" - \(error)")
+                        observer.on(.error(error))
                     }
             }
             return Disposables.create()
@@ -66,22 +66,4 @@ protocol FlickrServer {
 
 protocol FlickrImageProtocol {
     var url: URL { get }
-}
-
-import AlamofireImage
-
-struct FlickrImage: JSONDecodable, FlickrImageProtocol {
-    var url: URL
-
-    init?(json: JSON) {
-        guard let url: URL = "media.m" <~~ json else {
-            print(" no media.m \(json)")
-            return nil
-        }
-        self.url = url
-        DispatchQueue.main.async {
-            let imageView = UIImageView()
-            imageView.af_setImage(withURL: url)
-        }
-    }
 }
