@@ -45,22 +45,31 @@ class SlideShowViewController: UIViewController {
     }
 
     private func display(next image: FlickrImageProtocol?) {
-
         guard let url = image?.url else {
             return
         }
 
-        let tempImageView = UIImageView()
-        tempImageView.af_setImage(withURL: url)
+        let cache = UIImageView.af_sharedImageDownloader.imageCache
+        let request = URLRequest(url: url)
+
+        let image = cache?.image(for: request, withIdentifier: url.absoluteString)
 
         let dissolve = CABasicAnimation(keyPath: "contents")
         dissolve.duration = 0.65
         dissolve.fromValue = photoView.image
-        dissolve.toValue = tempImageView.image
+        dissolve.toValue = image
 
         self.photoView.layer.add(dissolve, forKey: "animateDissolve")
-        self.photoView.image = tempImageView.image
+        self.photoView.image = image
 
         viewModel.popFirstPhoto()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SettingViewController.segueIdentifier,
+            let navigationController = segue.destination as? UINavigationController,
+            let settingViewController = navigationController.topViewController as? SettingViewController {
+            settingViewController.viewModel = viewModel
+        }
     }
 }
