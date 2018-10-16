@@ -24,7 +24,6 @@ class PublicPhotosRequest: FlickrRequest {
     }
 
     func process(result: PhotosResponse) {
-        print("urls \(result.photos.map({ $0.url }))")
         self.response.accept(result)
     }
 }

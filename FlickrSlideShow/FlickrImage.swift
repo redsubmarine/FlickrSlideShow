@@ -20,9 +20,5 @@ struct FlickrImage: JSONDecodable, FlickrImageProtocol {
             return nil
         }
         self.url = url
-        DispatchQueue.main.async {
-            let imageView = UIImageView()
-            imageView.af_setImage(withURL: url)
-        }
     }
 }

@@ -10,12 +10,13 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-struct SlideShowViewModel {
+struct SlideShowViewModel: CanChangeInterval {
     private var _photos = BehaviorRelay<[FlickrImageProtocol]>(value: [])
     var photos: Observable<[FlickrImageProtocol]>
 
     var currentImage: Observable<FlickrImageProtocol?>
     private var _interval: BehaviorRelay<TimeInterval>
+    var interval: Observable<TimeInterval>
     private var _pause = BehaviorRelay(value: true)
     var pause: Observable<Bool>
     private var server: Server
@@ -29,8 +30,9 @@ struct SlideShowViewModel {
         needFetchData = _needFetchData.asObservable()
             .distinctUntilChanged()
         pause = _pause.asObservable().distinctUntilChanged()
-        let interval = BehaviorRelay<Double>(value: 1)
+        let interval = BehaviorRelay<Double>(value: 2)
         _interval = interval
+        self.interval = interval.asObservable().distinctUntilChanged()
 
         let intervalObservable = pause
             .flatMapLatest({ pause -> Observable<Int> in
@@ -73,12 +75,17 @@ struct SlideShowViewModel {
 
     func pauseToggle() {
         _pause.accept(!_pause.value)
-        print(" _pause.value: \(_pause.value)")
     }
 
     func popFirstPhoto() {
         var photos = _photos.value
-        photos.remove(at: 0)
+        let url = photos.remove(at: 0).url
+        let request = URLRequest(url: url)
+
+        if UIImageView.af_sharedImageDownloader.imageCache?.removeImage(for: request, withIdentifier: nil) == true {
+            print(" remove cache \(url)")
+        }
+
         _photos.accept(photos)
     }
 
