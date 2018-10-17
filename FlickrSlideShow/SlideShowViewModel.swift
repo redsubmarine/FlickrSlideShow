@@ -41,6 +41,7 @@ struct SlideShowViewModel: CanChangeInterval {
                 } else {
                     return interval.asObservable()
                         .flatMapLatest({ Observable<Int>.interval($0, scheduler: MainScheduler.instance) })
+                        .startWith(0)
                 }
             })
 
