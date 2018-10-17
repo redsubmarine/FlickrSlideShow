@@ -35,6 +35,11 @@ class SlideShowViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
+        viewModel.pause
+            .map({ $0 ? "Play" : "Stop" })
+            .bind(onNext: setPlayButtonTitle)
+            .disposed(by: disposeBag)
+
         playButton.rx.tap
             .bind(onNext: viewModel.pauseToggle)
             .disposed(by: disposeBag)
@@ -42,6 +47,10 @@ class SlideShowViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+
+    private func setPlayButtonTitle(_ title: String) {
+        playButton.setTitle(title, for: .normal)
     }
 
     private func display(next image: FlickrImageProtocol?) {
