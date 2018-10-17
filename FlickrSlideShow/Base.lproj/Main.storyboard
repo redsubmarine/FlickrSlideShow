@@ -23,7 +23,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naV-yp-V1d">
                                 <rect key="frame" x="338" y="615" width="22" height="22"/>
                                 <connections>
-                                    <segue destination="Yhm-Ck-H0g" kind="presentation" identifier="fromSlideToSettings" id="n3P-qb-GbQ"/>
+                                    <segue destination="Yhm-Ck-H0g" kind="popoverPresentation" identifier="fromSlideToSettings" popoverAnchorView="naV-yp-V1d" id="n3P-qb-GbQ">
+                                        <popoverArrowDirection key="popoverArrowDirection" down="YES"/>
+                                    </segue>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNI-Ct-J4J">
@@ -49,6 +51,7 @@
                     <connections>
                         <outlet property="photoView" destination="Uu0-tw-UUm" id="aVy-wd-XDd"/>
                         <outlet property="playButton" destination="uNI-Ct-J4J" id="ppJ-VC-cSu"/>
+                        <outlet property="settingButton" destination="naV-yp-V1d" id="pzm-0A-mah"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vqs-rd-6mh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -66,7 +69,7 @@
                         <sections>
                             <tableViewSection id="bs2-2T-2pN">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="85" id="Eg4-6y-ZHd">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="85" id="Eg4-6y-ZHd">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Eg4-6y-ZHd" id="Vhu-mJ-A3Q">
