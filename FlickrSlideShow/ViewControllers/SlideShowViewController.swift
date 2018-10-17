@@ -11,13 +11,14 @@ import RxCocoa
 import RxSwift
 import AlamofireImage
 
-class SlideShowViewController: UIViewController {
+final class SlideShowViewController: UIViewController {
 
     @IBOutlet weak var photoView: UIImageView!
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
 
     var viewModel: SlideShowViewModel!
     var disposeBag = DisposeBag()
-    @IBOutlet weak var playButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,18 +36,44 @@ class SlideShowViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel.pause
-            .map({ $0 ? "Play" : "Stop" })
+        viewModel.playButtonTitle
             .bind(onNext: setPlayButtonTitle)
             .disposed(by: disposeBag)
 
         playButton.rx.tap
+            .withLatestFrom(viewModel.pause, resultSelector: { ($0, $1) })
+            .map({ $0.1 })
+            .do(onNext: viewModel.buttonsHidden)
+            .map({ _ in })
             .bind(onNext: viewModel.pauseToggle)
+            .disposed(by: disposeBag)
+
+        viewModel.isHiddenButtons
+            .bind(onNext: isHiddenAllButtons)
+            .disposed(by: disposeBag)
+
+        setupGesture()
+    }
+
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer()
+        view.addGestureRecognizer(tapGesture)
+
+        tapGesture.rx.event.asObservable()
+            .withLatestFrom(viewModel.isHiddenButtons, resultSelector: { ($0, $1) })
+            .filter({ $0.0.state == .recognized })
+            .map({ !$0.1 })
+            .bind(onNext: viewModel.buttonsHidden)
             .disposed(by: disposeBag)
     }
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+
+    private func isHiddenAllButtons(_ isHidden: Bool) {
+        playButton.isHidden = isHidden
+        settingButton.isHidden = isHidden
     }
 
     private func setPlayButtonTitle(_ title: String) {

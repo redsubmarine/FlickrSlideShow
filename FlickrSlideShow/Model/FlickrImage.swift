@@ -16,7 +16,6 @@ struct FlickrImage: JSONDecodable, FlickrImageProtocol {
 
     init?(json: JSON) {
         guard let url: URL = "media.m" <~~ json else {
-            print(" no media.m \(json)")
             return nil
         }
         self.url = url

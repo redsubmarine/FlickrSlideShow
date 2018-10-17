@@ -19,10 +19,14 @@ struct SlideShowViewModel: CanChangeInterval {
     var interval: Observable<TimeInterval>
     private var _pause = BehaviorRelay(value: true)
     var pause: Observable<Bool>
+    var playButtonTitle: Observable<String>
     private var server: Server
 
     private var _needFetchData = BehaviorRelay(value: false)
     var needFetchData: Observable<Bool>
+
+    private var _isHiddenButtons = BehaviorRelay(value: false)
+    var isHiddenButtons: Observable<Bool>
 
     init(server: Server) {
         self.server = server
@@ -30,9 +34,16 @@ struct SlideShowViewModel: CanChangeInterval {
         needFetchData = _needFetchData.asObservable()
             .distinctUntilChanged()
         pause = _pause.asObservable().distinctUntilChanged()
-        let interval = BehaviorRelay<Double>(value: 2)
+
+        playButtonTitle = pause
+            .map({ $0 ? "Play" : "Stop" })
+
+        let interval = BehaviorRelay<Double>(value: (Persist.shared.value(for: .slideTime) as? Double) ?? 3)
         _interval = interval
         self.interval = interval.asObservable().distinctUntilChanged()
+            .do(onNext: {
+                Persist.shared.set(value: $0, for: .slideTime)
+            })
 
         let intervalObservable = pause
             .flatMapLatest({ pause -> Observable<Int> in
@@ -44,6 +55,8 @@ struct SlideShowViewModel: CanChangeInterval {
                         .startWith(0)
                 }
             })
+
+        isHiddenButtons = _isHiddenButtons.asObservable()
 
         currentImage = intervalObservable.withLatestFrom(photos)
             .map({ photos in
@@ -76,6 +89,10 @@ struct SlideShowViewModel: CanChangeInterval {
 
     func pauseToggle() {
         _pause.accept(!_pause.value)
+    }
+
+    func buttonsHidden(_ hidden: Bool) {
+        _isHiddenButtons.accept(hidden)
     }
 
     func popFirstPhoto() {
