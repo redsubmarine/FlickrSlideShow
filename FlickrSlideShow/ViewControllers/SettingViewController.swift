@@ -13,12 +13,14 @@ import RxCocoa
 protocol CanChangeInterval {
     func changeInterval(_ interval: Double)
     var interval: Observable<TimeInterval> { get }
+    var intervalText: Observable<String> { get }
 }
 
 class SettingViewController: UITableViewController {
 
     static let segueIdentifier = "fromSlideToSettings"
 
+    @IBOutlet weak var durationTimeLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var timeSlider: UISlider!
 
@@ -43,10 +45,11 @@ class SettingViewController: UITableViewController {
             .bind(to: timeSlider.rx.value)
             .disposed(by: disposeBag)
 
-        viewModel.interval
-            .map({ "\(Int($0)) 초" })
+        viewModel.intervalText
             .bind(to: timeLabel.rx.text)
             .disposed(by: disposeBag)
+
+        durationTimeLabel.text = R.Setting.String.durationTime.description
     }
 
     deinit {

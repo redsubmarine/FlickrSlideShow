@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  FlickrSlideShow
+
+  Created by 양원석 on 18/10/2018.
+  Copyright © 2018 red. All rights reserved.
+*/
+
+"Play" = "재생";
+"Stop" = "정지";
+"DurationTime" = "이미지 1장이 재생되는 시간";
+"%d second" = "%d 초";
