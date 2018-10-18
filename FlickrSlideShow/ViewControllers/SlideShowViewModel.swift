@@ -23,17 +23,12 @@ struct SlideShowViewModel: CanChangeInterval {
     var playButtonTitle: Observable<String>
     private var server: FlickrServer
 
-    private var _needFetchData = BehaviorRelay(value: false)
-    var needFetchData: Observable<Bool>
-
     private var _isHiddenButtons = BehaviorRelay(value: false)
     var isHiddenButtons: Observable<Bool>
 
     init(server: FlickrServer) {
         self.server = server
         photos = _photos.asObservable()
-        needFetchData = _needFetchData.asObservable()
-            .distinctUntilChanged()
         pause = _pause.asObservable().distinctUntilChanged()
 
         playButtonTitle = pause
@@ -70,10 +65,6 @@ struct SlideShowViewModel: CanChangeInterval {
                     return nil
                 }
             })
-
-        _ = photos.asObservable()
-            .map({ $0.count == 3 })
-            .bind(to: _needFetchData)
     }
 
     func changeInterval(_ interval: Double) {
@@ -95,7 +86,7 @@ struct SlideShowViewModel: CanChangeInterval {
         _isHiddenButtons.accept(hidden)
     }
 
-    func popFirstPhoto() {
+    mutating func popFirstPhoto() {
         var photos = _photos.value
         let url = photos.remove(at: 0).url
         let request = URLRequest(url: url)
@@ -105,6 +96,9 @@ struct SlideShowViewModel: CanChangeInterval {
         }
 
         _photos.accept(photos)
+        if photos.count == 3 {
+            getMorePhotos()
+        }
     }
 
 }
