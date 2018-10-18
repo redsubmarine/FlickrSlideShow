@@ -1,0 +1,12 @@
+
+/* Class = "UINavigationItem"; title = "Setting"; ObjectID = "0MV-eJ-srW"; */
+"0MV-eJ-srW.title" = "Setting";
+
+/* Class = "UILabel"; text = "5 sec"; ObjectID = "bvT-hX-wDf"; */
+"bvT-hX-wDf.text" = "5 sec";
+
+/* Class = "UIButton"; normalTitle = "Play"; ObjectID = "uNI-Ct-J4J"; */
+"uNI-Ct-J4J.normalTitle" = "Play";
+
+/* Class = "UILabel"; text = "이미지 하나가 재생되는 시간"; ObjectID = "yTx-db-nK7"; */
+"yTx-db-nK7.text" = "이미지 하나가 재생되는 시간";

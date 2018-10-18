@@ -17,6 +17,7 @@ struct SlideShowViewModel: CanChangeInterval {
     var currentImage: Observable<FlickrImageProtocol?>
     private var _interval: BehaviorRelay<TimeInterval>
     var interval: Observable<TimeInterval>
+    var intervalText: Observable<String>
     private var _pause = BehaviorRelay(value: true)
     var pause: Observable<Bool>
     var playButtonTitle: Observable<String>
@@ -36,7 +37,8 @@ struct SlideShowViewModel: CanChangeInterval {
         pause = _pause.asObservable().distinctUntilChanged()
 
         playButtonTitle = pause
-            .map({ $0 ? "Play" : "Stop" })
+            .map({ $0 ? R.Main.String.play : R.Main.String.stop })
+            .map({ $0.description })
 
         let interval = BehaviorRelay<Double>(value: (Persist.shared.value(for: .slideTime) as? Double) ?? 3)
         _interval = interval
@@ -44,6 +46,8 @@ struct SlideShowViewModel: CanChangeInterval {
             .do(onNext: {
                 Persist.shared.set(value: $0, for: .slideTime)
             })
+        self.intervalText = interval.map({ Int($0) })
+            .map({ R.Setting.String.second(sec: $0).description })
 
         let intervalObservable = pause
             .flatMapLatest({ pause -> Observable<Int> in

@@ -120,6 +120,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="durationTimeLabel" destination="yTx-db-nK7" id="6Xd-Bb-gq5"/>
                         <outlet property="timeLabel" destination="bvT-hX-wDf" id="fpX-sc-wbF"/>
                         <outlet property="timeSlider" destination="BLv-4A-IGm" id="Eft-lk-ZMe"/>
                     </connections>
