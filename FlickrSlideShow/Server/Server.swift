@@ -16,7 +16,14 @@ class Server: FlickrServer {
     let session = Alamofire.SessionManager(configuration: URLSessionConfiguration.default)
     private let httpDispatchQueue = DispatchQueue(label: "flickr_http_queue")
 
-    func request<T: FlickrRequest>(_ request: T) -> Observable<T.ResponseType?> {
+    func getPublicPhotos() -> Observable<[FlickrImageProtocol]> {
+        let getPublicPhotos = PublicPhotosRequest()
+        return request(getPublicPhotos)
+            .retry(3)
+            .map({ $0?.photos ?? [] })
+    }
+
+    private func request<T: FlickrRequest>(_ request: T) -> Observable<T.ResponseType?> {
         guard let url = URL(string: request.url) else {
             fatalError()
         }
@@ -62,6 +69,7 @@ protocol FlickrResponse: JSONDecodable {
 }
 
 protocol FlickrServer {
+    func getPublicPhotos() -> Observable<[FlickrImageProtocol]>
 }
 
 protocol FlickrImageProtocol {
