@@ -29,13 +29,6 @@ final class SlideShowViewController: UIViewController {
             .bind(onNext: display)
             .disposed(by: disposeBag)
 
-        viewModel.needFetchData
-            .filter({ $0 == true })
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.getMorePhotos()
-            })
-            .disposed(by: disposeBag)
-
         viewModel.playButtonTitle
             .bind(onNext: setPlayButtonTitle)
             .disposed(by: disposeBag)
