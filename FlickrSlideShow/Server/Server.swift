@@ -21,6 +21,7 @@ class Server: FlickrServer {
         return request(getPublicPhotos)
             .retry(3)
             .map({ $0?.photos ?? [] })
+            .catchErrorJustReturn([])
     }
 
     private func request<T: FlickrRequest>(_ request: T) -> Observable<T.ResponseType?> {
