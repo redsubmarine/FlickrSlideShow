@@ -17,7 +17,8 @@ target 'FlickrSlideShow' do
   target 'FlickrSlideShowTests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'RxBlocking'
+    pod 'RxBlocking', '4.3.1'
+
   end
 
 end
