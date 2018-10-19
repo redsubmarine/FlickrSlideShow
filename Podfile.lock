@@ -14,7 +14,7 @@ DEPENDENCIES:
   - Alamofire (= 4.7.3)
   - AlamofireImage (= 3.4.1)
   - Gloss (= 2.0.1)
-  - RxBlocking
+  - RxBlocking (= 4.3.1)
   - RxCocoa (= 4.3.1)
   - RxSwift (= 4.3.1)
   - SwiftLint (= 0.27.0)
@@ -38,6 +38,6 @@ SPEC CHECKSUMS:
   RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
-PODFILE CHECKSUM: 48dfac8db86dc6e0ac43164197d712a49c7ee07d
+PODFILE CHECKSUM: 64f9f9de4f71924ebf97bb925c531a8d217fbbf0
 
 COCOAPODS: 1.5.3
